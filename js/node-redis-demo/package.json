@@ -1,0 +1,13 @@
+{
+  "name": "node-redis-demo",
+  "version": "0.0.1",
+  "author": "Robert Moss",
+  "dependencies": {
+    "express": "*",
+    "redis": "*",
+    "body-parser": "*" 
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}

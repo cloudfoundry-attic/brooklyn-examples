@@ -1,0 +1,13 @@
+{
+  "name": "PolyglotDemo",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "*",
+    "connect-redis": "*",
+    "mongoose": "*",
+    "body-parser": "*",
+    "nodiak": "*",
+    "async": "*",
+    "cassandra-driver": "1.0.0"
+  }
+}

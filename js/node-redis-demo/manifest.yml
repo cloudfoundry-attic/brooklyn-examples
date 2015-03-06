@@ -1,0 +1,7 @@
+applications:
+- name: my-app
+  brooklyn:
+  - name: redis
+    location: aws-california
+    services:
+    - type: brooklyn.entity.nosql.redis.RedisStore
