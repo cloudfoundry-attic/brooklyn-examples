@@ -9,4 +9,4 @@ and you have installed the [Brooklyn Plugin](https://github.com/cloudfoundry-com
 
 To deploy simply
 
-  $ cf brooklyn push 
+    $ cf brooklyn push 
