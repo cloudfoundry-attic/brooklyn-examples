@@ -34,7 +34,7 @@ if(process.env.VCAP_SERVICES){
   credentials = env.riak[0].credentials;
   clusterAppKey = Object.keys(credentials)[0];
   var children = credentials[clusterAppKey].children;
-  var firstChildKey = Object.keys(children)[0];
+  var firstChildKey = credentials[clusterAppKey]["cluster.first.entity"];
   var riakHost = children[firstChildKey]["host.name"];
   var riakPort = children[firstChildKey]["riak.webPort"];
 }
@@ -79,7 +79,11 @@ var ProductCatalog = mongoose.model('Item', Item);
 // we use Riak as the shopping cart
 var riak = require('nodiak').getClient('http', riakHost, riakPort);
 riak.ping(function(err, response) {
-    console.log("RIAK: " + response);
+    if(err){
+       console.log(err);
+       console.log("\n"+riakHost + ":" + riakPort);
+    }
+    else console.log("RIAK: " + response);
 });
 
 // setup connection to Cassandra
