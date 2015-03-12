@@ -1,10 +1,11 @@
 // setup express
 var express = require('express');
 var app = express();
+var session = require('express-session');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
-
-app.use(express.cookieParser());
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
 if(process.env.VCAP_SERVICES){
   var env = JSON.parse(process.env.VCAP_SERVICES);
   
@@ -54,8 +55,8 @@ else{
 
 // setup redis 
 // we use redis as the session store
-var RedisStore = require('connect-redis')(express);
-app.use(express.session({
+var RedisStore = require('connect-redis')(session);
+app.use(session({
   store: new RedisStore(redisCredentials),  
   secret: '123456789QWERTY'
 }));

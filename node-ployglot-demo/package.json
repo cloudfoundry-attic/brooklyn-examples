@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "*",
+    "express-session": "*",
+    "cookie-parser": "*",
     "connect-redis": "*",
     "mongoose": "*",
     "body-parser": "*",
