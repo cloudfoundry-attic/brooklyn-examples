@@ -1,0 +1,50 @@
+applications:
+- name: my-app
+  command: node app.js
+  brooklyn:
+  - name: redis
+    location: aws-california
+    services:
+    - type: brooklyn.entity.nosql.redis.RedisStore
+  - name: cassandra
+    location: aws-tokyo
+    services:
+    - type: brooklyn.entity.nosql.cassandra.CassandraCluster
+      brooklyn.config:
+        cluster.initial.size: 3
+        cluster.initial.quorumSize: 2
+  - name: mongodb
+    location: aws-ireland
+    services:
+    - type: brooklyn.entity.nosql.mongodb.MongoDBServer
+  - name: riak
+    location: aws-ireland
+    services:
+    - type: brooklyn.entity.nosql.riak.RiakCluster
+      initialSize: 1
+  - name: couchbase
+    location: localhost
+    services:
+    - type: brooklyn.entity.nosql.couchbase.CouchbaseCluster
+      location: aws-oregon
+      adminUsername: Administrator
+      adminPassword: Password
+      initialSize: 3
+      createBuckets:
+      - bucket: default
+        bucket-port: 11211
+      replication:
+      - toCluster: $brooklyn:entity("couchbase-backup")
+        fromBucket: default
+        toBucket: default-backup
+    - type: brooklyn.entity.nosql.couchbase.CouchbaseCluster
+      id: couchbase-backup
+      location: aws-oregon
+      adminUsername: Administrator
+      adminPassword: Password2
+      initialSize: 1
+      createBuckets:
+      - bucket: default-backup
+        bucket-port: 11222
+
+    
