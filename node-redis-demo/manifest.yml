@@ -1,5 +1,6 @@
 applications:
 - name: my-app
+  command: node app.js
   brooklyn:
   - name: redis
     location: aws-california
